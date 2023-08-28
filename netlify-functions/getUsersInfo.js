@@ -5,7 +5,7 @@ const fetch = require("node-fetch");
 exports.handler = async function (event, context) {
   try {
     const response = await fetch(
-      "https://dotnet-apis-csharp.netlify.app/.netlify/functions/getUsersInfo"
+      "https://joyful-sunshine-d424f0.netlify.app/.netlify/functions/getUsersInfo"
     );
     const data = await response.json();
 
