@@ -4,9 +4,7 @@ import fetch from "node-fetch";
 
 exports.handler = async function (event, context) {
   try {
-    const response = await fetch(
-      "/.netlify/functions/getUsersInfo"
-    );
+    const response = await fetch("/.netlify/netlify-functions/getUsersInfo");
     const data = await response.json();
 
     return {
