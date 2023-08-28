@@ -7,7 +7,7 @@ exports.handler = async function (event, context) {
 
   try {
     const response = await fetch(
-      `https://joyful-sunshine-d424f0.netlify.app/.netlify/functions/getUserByNatId?userNatNum=${userNatNum}`
+      `/.netlify/functions/getUserByNatId?userNatNum=${userNatNum}`
     );
     const data = await response.json();
 
