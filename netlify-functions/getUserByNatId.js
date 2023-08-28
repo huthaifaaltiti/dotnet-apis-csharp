@@ -1,13 +1,11 @@
-// netlify-functions/getUserByNatId.js
-
 import fetch from "node-fetch";
 
-exports.handler = async function (event, context) {
+export async function handler(event, context) {
   const { userNatNum } = event.queryStringParameters;
 
   try {
     const response = await fetch(
-      `/.netlify/netlify-functions/getUserByNatId?userNatNum=${userNatNum}`
+      `https://joyful-sunshine-d424f0.netlify.app/api/users?userNatNum=${userNatNum}`
     );
     const data = await response.json();
 
@@ -21,4 +19,4 @@ exports.handler = async function (event, context) {
       body: JSON.stringify({ error: "Internal Server Error" }),
     };
   }
-};
+}

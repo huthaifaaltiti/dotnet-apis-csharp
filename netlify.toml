@@ -1,0 +1,8 @@
+[build]
+  command = "npm run build"  # Replace with your build command
+  functions = "path/to/your/functions/folder"
+  node_version = "14"  # Use the Node.js version you prefer
+  environment = { NODE_ENV = "production" }
+
+[dev]
+  command = "npm run start"  # Replace with your development command
