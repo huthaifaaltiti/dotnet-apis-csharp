@@ -1,8 +1,8 @@
 [build]
-  command = "npm run build"
+  command: npm run build
   functions = "./netlify-functions/"
   node_version = "14"
-  environment = { NODE_ENV = "production" }
+  environment = - NODE_ENV = "production" 
 
 [dev]
-  command = "npm run start"
+  command = npm run start
