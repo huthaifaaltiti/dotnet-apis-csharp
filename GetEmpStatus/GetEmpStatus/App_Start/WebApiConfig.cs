@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
 
 namespace GetEmpStatus
 {
@@ -19,6 +16,10 @@ namespace GetEmpStatus
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            // Comment out or remove the following lines to disable Help Page
+            //config.EnableHelpPage();
+            //config.EnableHelpPage(WebApiConfigExtensions.DefaultArea);
         }
     }
 }
