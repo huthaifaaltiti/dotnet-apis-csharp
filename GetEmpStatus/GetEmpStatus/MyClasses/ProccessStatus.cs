@@ -28,9 +28,10 @@ namespace GetEmpStatus.MyClasses
             {
                 while (reader.Read())
                 {
+                    int userNatNum = Convert.ToInt32(reader["NationalNumber"]);
+
                     EmpInfo userInfo = new EmpInfo
                     {
-                        UserID = Convert.ToInt32(reader["UserID"]),
                         Username = reader["Username"].ToString(),
                         NationalNumber = Convert.ToInt32(reader["NationalNumber"]),
                         Email = reader["Email"].ToString(),
@@ -38,8 +39,27 @@ namespace GetEmpStatus.MyClasses
                         IsActive = Convert.ToBoolean(reader["IsActive"])
                     };
 
+                    if (userInfo.IsActive)
+                    {
+                        decimal avgSalary = AvgSalaries(userNatNum);
+                        userInfo.AvgSalary = avgSalary;
+
+                        decimal largestSalary = LargerSalary(userNatNum);
+                        userInfo.LargestSalary = largestSalary;
+
+                        string salaryStatus = GetUserSalaryStatus(userNatNum);
+                        userInfo.UserSalaryStatus = salaryStatus;
+                    }
+                    else
+                    {
+                        userInfo.AvgSalary = 0;
+                        userInfo.LargestSalary = 0;
+                        userInfo.UserSalaryStatus = "The user with the provided natioanl number is no longer active in the database";
+                    }
+
                     usersInfo.Add(userInfo);
                 }
+               
             }
 
             string jsonResult = JsonConvert.SerializeObject(usersInfo);
@@ -120,7 +140,16 @@ namespace GetEmpStatus.MyClasses
 
                     if (salaries.Count > 0)
                     {
-                        decimal averageSalary = salaries.Average();
+                        //decimal averageSalary = salaries.Average();
+                        decimal sum = 0;
+
+                        foreach (var salary in salaries)
+                        {
+                            sum += salary;
+                        }
+
+                        decimal averageSalary = sum / salaries.Count;
+              
                         return averageSalary;
                     }
                     else
@@ -153,7 +182,16 @@ namespace GetEmpStatus.MyClasses
 
                     if (salaries.Count > 0)
                     {
-                        decimal largestSalary = salaries.Max();
+                        //decimal largestSalary = salaries.Max();
+                        decimal largestSalary = 0;
+
+                        foreach (var salary in salaries)
+                        {
+                            if (salary > largestSalary)
+                            {
+                                largestSalary = salary;
+                            }
+                        }
                         return largestSalary;
                     }
                     else
